@@ -1,83 +1,57 @@
 ﻿import React from "react";
-import { motion } from "framer-motion";
-import { FaMedal, FaCrown } from "react-icons/fa";
 
 export default function Leaderboard() {
-    // Example data — you can later fetch from backend or Firebase
-    const leaders = [
-        { name: "Aarav Sharma", score: 980, rank: 1 },
-        { name: "Isha Patel", score: 940, rank: 2 },
-        { name: "Rohan Das", score: 910, rank: 3 },
-        { name: "Priya Verma", score: 870, rank: 4 },
-        { name: "Karan Mehta", score: 850, rank: 5 },
-        { name: "Sneha Nair", score: 830, rank: 6 },
-        { name: "Devansh Gupta", score: 800, rank: 7 },
+    const leaderboardData = [
+        { rank: 1, name: "Priya Sharma", points: 980, track: "Coding & Problem Solving (C)" },
+        { rank: 2, name: "Rohit Mehta", points: 950, track: "Data Structures" },
+        { rank: 3, name: "Aditi Das", points: 920, track: "Algorithms" },
+        { rank: 4, name: "Aman Verma", points: 890, track: "SQL Mastery" },
+        { rank: 5, name: "Neha Singh", points: 870, track: "System Design" },
     ];
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-start pt-24 pb-10 bg-white/70 backdrop-blur-md">
-            <h1 className="text-4xl font-extrabold text-orange-700 mb-8">🏆 Leaderboard</h1>
+        <div className="min-h-screen flex flex-col items-center bg-gradient-to-b from-orange-50 to-white pt-24 px-4">
+            <h2 className="text-3xl font-bold text-orange-700 mb-6 text-center">
+                🏆 Leaderboard
+            </h2>
 
-            {/* Top 3 podium section */}
-            <div className="flex justify-center items-end gap-8 mb-12">
-                {leaders.slice(0, 3).map((leader, index) => (
-                    <motion.div
-                        key={leader.rank}
-                        initial={{ opacity: 0, y: 40 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: index * 0.2 }}
-                        className={`relative flex flex-col items-center justify-end w-40 p-4 rounded-2xl shadow-lg 
-                            ${leader.rank === 1 ? "bg-yellow-100 border-4 border-yellow-500" :
-                                leader.rank === 2 ? "bg-gray-100 border-4 border-gray-400" :
-                                    "bg-orange-100 border-4 border-orange-400"}`}
-                        style={{ height: 200 + (3 - leader.rank) * 30 }}
-                    >
-                        {leader.rank === 1 && (
-                            <FaCrown className="text-yellow-500 text-3xl absolute -top-6" />
-                        )}
-                        <p className="font-semibold text-lg">{leader.name}</p>
-                        <p className="text-sm text-gray-600">Score: {leader.score}</p>
-                        <FaMedal
-                            className={`text-2xl mt-2 ${leader.rank === 1
-                                    ? "text-yellow-500"
-                                    : leader.rank === 2
-                                        ? "text-gray-500"
-                                        : "text-orange-600"
-                                }`}
-                        />
-                        <p className="font-bold mt-1">#{leader.rank}</p>
-                    </motion.div>
-                ))}
-            </div>
-
-            {/* Rest of leaderboard */}
-            <div className="bg-white/80 shadow-md rounded-2xl w-full max-w-3xl overflow-hidden">
-                <table className="w-full text-left">
+            {/* Responsive Table Container */}
+            <div className="w-full max-w-4xl overflow-x-auto shadow-lg rounded-lg bg-white">
+                <table className="min-w-full border-collapse">
                     <thead className="bg-orange-600 text-white">
                         <tr>
-                            <th className="py-3 px-4">Rank</th>
-                            <th className="py-3 px-4">Name</th>
-                            <th className="py-3 px-4 text-right">Score</th>
+                            <th className="py-3 px-4 text-left">Rank</th>
+                            <th className="py-3 px-4 text-left">Name</th>
+                            <th className="py-3 px-4 text-left">Track</th>
+                            <th className="py-3 px-4 text-left">Points</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {leaders.slice(3).map((leader) => (
+                        {leaderboardData.map((student, index) => (
                             <tr
-                                key={leader.rank}
-                                className="border-b border-gray-200 hover:bg-orange-50 transition"
+                                key={index}
+                                className={`border-b hover:bg-orange-50 transition ${index % 2 === 0 ? "bg-white" : "bg-orange-100/50"
+                                    }`}
                             >
-                                <td className="py-3 px-4 font-semibold text-gray-700">
-                                    #{leader.rank}
+                                <td className="py-3 px-4 font-semibold text-gray-800">
+                                    {student.rank}
                                 </td>
-                                <td className="py-3 px-4 text-gray-700">{leader.name}</td>
-                                <td className="py-3 px-4 text-right text-gray-600">
-                                    {leader.score}
+                                <td className="py-3 px-4 text-gray-700">{student.name}</td>
+                                <td className="py-3 px-4 text-gray-700 whitespace-nowrap">
+                                    {student.track}
+                                </td>
+                                <td className="py-3 px-4 font-bold text-orange-700">
+                                    {student.points}
                                 </td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
             </div>
+
+            <p className="text-gray-500 mt-6 text-center max-w-md text-sm">
+                Updated in real-time as students complete levels, projects, and challenges.
+            </p>
         </div>
     );
 }
