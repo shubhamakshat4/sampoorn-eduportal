@@ -171,24 +171,45 @@ function HomePage() {
             </section>
 
             {/* 🏢 Company Carousel */}
-            <section className="bg-white py-8">
-                <h3 className="text-center text-lg font-semibold text-gray-700 mb-6">
+            <section className="bg-white py-10">
+                <h3 className="text-center text-lg font-semibold text-gray-700 mb-8">
                     Our Students Aim for Excellence at
                 </h3>
-                <div className="flex overflow-hidden space-x-12 animate-scroll">
-                    {[
-                        "tcs.png", "infosys.png", "accenture.png", "meta.png",
-                        "microsoft.png", "amazon.png", "google.png", "netflix.png", "cognizant.png", "deloitte.png"
-                    ].map((logo, index) => (
-                        <img
-                            key={index}
-                            src={`/logos/${logo}`}
-                            alt={logo}
-                            className="h-12 w-auto opacity-80 hover:opacity-100 transition"
-                        />
-                    ))}
+
+                <div className="overflow-hidden relative max-w-6xl mx-auto">
+                    {/* Carousel container */}
+                    <div className="flex items-center justify-start space-x-10 animate-slide">
+                        {[
+                            "tcs.png",
+                            "infosys.png",
+                            "accenture.png",
+                            "meta.png",
+                            "microsoft.png",
+                            "amazon.png",
+                            "google.png",
+                            "netflix.png",
+                            "cognizant.png",
+                            "deloitte.png",
+                        ].map((logo, index) => (
+                            <div
+                                key={index}
+                                className="flex-shrink-0 w-24 sm:w-28 md:w-32 flex items-center justify-center"
+                            >
+                                <img
+                                    src={`/logos/${logo}`}
+                                    alt={logo}
+                                    className="h-10 sm:h-12 md:h-14 w-auto opacity-80 hover:opacity-100 transition"
+                                />
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Optional: fade edges for a smooth look */}
+                    <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-white to-transparent"></div>
+                    <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-white to-transparent"></div>
                 </div>
             </section>
+
 
             {/* ⚙️ Footer */}
             <footer className="bg-orange-700 text-white text-center py-4 mt-10">
