@@ -173,7 +173,7 @@ function HomePage() {
             {/* 🏢 Company Carousel */}
             <section className="bg-white py-10">
                 <h3 className="text-center text-lg font-semibold text-gray-700 mb-8">
-                    Our Students Aim for Excellence at
+                    Our Roadmap Aims for Excellence at
                 </h3>
 
                 <div className="overflow-hidden relative max-w-6xl mx-auto">
