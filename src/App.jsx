@@ -14,20 +14,56 @@ import Leaderboard from "./components/Leaderboard";
 
 function HomePage() {
     const navigate = useNavigate();
+    const [menuOpen, setMenuOpen] = React.useState(false);
+
 
     return (
         <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white text-gray-800 font-sans">
             {/* 🌐 Navbar */}
             <nav className="bg-white shadow-md fixed top-0 w-full z-50">
                 <div className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+                    {/* 🧭 Logo */}
                     <h1
                         className="text-2xl font-bold text-orange-700 cursor-pointer"
                         onClick={() => navigate("/")}
                     >
                         Sampoorn EduPortal
                     </h1>
-                    <ul className="flex space-x-6 text-gray-600 font-medium">
-                        <li className="hover:text-orange-700 cursor-pointer" onClick={() => navigate("/")}>Home</li>
+
+                    {/* 📱 Mobile menu toggle */}
+                    <button
+                        className="md:hidden text-orange-700 focus:outline-none"
+                        onClick={() => setMenuOpen(!menuOpen)}
+                    >
+                        <svg
+                            className="w-6 h-6"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            {menuOpen ? (
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2"
+                                    d="M6 18L18 6M6 6l12 12"
+                                />
+                            ) : (
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2"
+                                    d="M4 6h16M4 12h16M4 18h16"
+                                />
+                            )}
+                        </svg>
+                    </button>
+
+                    {/* 🌐 Desktop Menu */}
+                    <ul className="hidden md:flex space-x-6 text-gray-600 font-medium">
+                        <li className="hover:text-orange-700 cursor-pointer" onClick={() => navigate("/")}>
+                            Home
+                        </li>
                         <li
                             className="hover:text-orange-700 cursor-pointer"
                             onClick={() => navigate("/placement-login")}
@@ -40,19 +76,57 @@ function HomePage() {
                         >
                             School Programs
                         </li>
-
-                        <li className="hover:text-orange-700 cursor-pointer" onClick={() => navigate("/leaderboard")}>Leaderboard</li>
-
+                        <li
+                            className="hover:text-orange-700 cursor-pointer"
+                            onClick={() => navigate("/leaderboard")}
+                        >
+                            Leaderboard
+                        </li>
                         <li
                             className="hover:text-orange-700 cursor-pointer"
                             onClick={() => window.open("https://gurudev.artofliving.org", "_blank")}
                         >
                             Inspiration
                         </li>
-
                     </ul>
                 </div>
+
+                {/* 📱 Mobile Dropdown Menu */}
+                {menuOpen && (
+                    <div className="md:hidden bg-white shadow-lg">
+                        <ul className="flex flex-col space-y-3 py-4 text-center text-gray-700 font-medium">
+                            <li className="hover:text-orange-700 cursor-pointer" onClick={() => navigate("/")}>
+                                Home
+                            </li>
+                            <li
+                                className="hover:text-orange-700 cursor-pointer"
+                                onClick={() => navigate("/placement-login")}
+                            >
+                                Placement Track
+                            </li>
+                            <li
+                                className="hover:text-orange-700 cursor-pointer"
+                                onClick={() => navigate("/school-login")}
+                            >
+                                School Programs
+                            </li>
+                            <li
+                                className="hover:text-orange-700 cursor-pointer"
+                                onClick={() => navigate("/leaderboard")}
+                            >
+                                Leaderboard
+                            </li>
+                            <li
+                                className="hover:text-orange-700 cursor-pointer"
+                                onClick={() => window.open("https://gurudev.artofliving.org", "_blank")}
+                            >
+                                Inspiration
+                            </li>
+                        </ul>
+                    </div>
+                )}
             </nav>
+
 
             {/* 🏠 Hero Section */}
             <header className="flex flex-col items-center justify-center text-center pt-28 pb-1 px-2">
